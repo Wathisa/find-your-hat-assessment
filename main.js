@@ -53,6 +53,28 @@ class Field {
       } else if (move === "L") {
         this.moveRight();
       }
+
+      if (
+        this.playerRow < 0 ||
+        this.playerRow >= this.field.length ||
+        this.playerCol < 0 ||
+        this.playerCol >= this.field[0].length
+      ) {
+        console.log("Game Over! You went out of map 💥");
+        break;
+      }
+
+      let currentPosition = this.field[this.playerRow][this.playerCol];
+
+      if (currentPosition === "🕳") {
+        console.log("You fell into a hole! Game over! 💀");
+        break;
+      }
+
+      if (currentPosition === "🎩") {
+        console.log("You found the hat! You win! 🎉");
+        break;
+      }
     }
   }
 }
