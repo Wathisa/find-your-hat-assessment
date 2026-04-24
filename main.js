@@ -1,8 +1,12 @@
 const field = [
-  ["🟩", "🟩", "🟩"],
-  ["🟩", "🟩", "🟩"],
-  ["🟩", "🟩", "🟩"],
+  ["🌱", "🌱", "🌱"],
+  ["🌱", "🌱", "🌱"],
+  ["🌱", "🌱", "🌱"],
 ];
+
+let playerRow = 0;
+let playerCol = 0;
+field[playerRow][playerCol] = "🤓";
 
 console.log(field);
 
