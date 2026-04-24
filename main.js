@@ -1,5 +1,10 @@
 const prompt = require("prompt-sync")();
 
+const hat = "🎩";
+const hole = "🕳";
+const fieldCharacter = "🌱";
+const playerCharacter = "🤓";
+
 class Field {
   constructor(field) {
     this.field = field;
@@ -14,7 +19,7 @@ class Field {
   }
 
   addPlayer() {
-    this.field[this.playerRow][this.playerCol] = "🤓";
+    this.field[this.playerRow][this.playerCol] = playerCharacter;
   }
 
   moveUp() {
@@ -42,7 +47,7 @@ class Field {
       move = move.toUpperCase();
 
       // ลบตำแหน่งเดิม
-      this.field[this.playerRow][this.playerCol] = "🌱";
+      this.field[this.playerRow][this.playerCol] = fieldCharacter;
 
       if (move === "I") {
         this.moveUp();
@@ -66,12 +71,12 @@ class Field {
 
       let currentPosition = this.field[this.playerRow][this.playerCol];
 
-      if (currentPosition === "🕳") {
+      if (currentPosition === hole) {
         console.log("You fell into a hole! Game over! 💀");
         break;
       }
 
-      if (currentPosition === "🎩") {
+      if (currentPosition === hat) {
         console.log("You found the hat! You win! 🎉");
         break;
       }
