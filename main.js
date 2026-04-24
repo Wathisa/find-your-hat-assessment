@@ -36,9 +36,14 @@ class Field {
   }
 
   runGame() {
+    console.log("Controls:");
+    console.log("I = Up, K = Down, J = Left, L = Right");
+    console.log("----------------------");
+
     while (true) {
       this.addPlayer();
       this.print();
+      console.log("----------------------");
 
       let move = prompt("Move (I/J/K/L): ");
 
