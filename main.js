@@ -29,6 +29,32 @@ class Field {
   moveRight() {
     this.playerCol++;
   }
+
+  runGame() {
+    while (true) {
+      this.addPlayer();
+      this.print();
+
+      let move = prompt("Move (I/J/K/L): ");
+
+      if (!move) continue;
+
+      move = move.toUpperCase();
+
+      // ลบตำแหน่งเดิม
+      this.field[this.playerRow][this.playerCol] = "🌱";
+
+      if (move === "I") {
+        this.moveUp();
+      } else if (move === "K") {
+        this.moveDown();
+      } else if (move === "J") {
+        this.moveLeft();
+      } else if (move === "L") {
+        this.moveRight();
+      }
+    }
+  }
 }
 
 const myField = new Field([
@@ -37,9 +63,7 @@ const myField = new Field([
   ["🌱", "🎩", "🌱"],
 ]);
 
-myField.moveRight();
-myField.addPlayer();
-myField.print();
+myField.runGame();
 
 /////////////////////////////////////////////////
 
