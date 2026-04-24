@@ -1,7 +1,7 @@
 const prompt = require("prompt-sync")();
 
 const hat = "🎩";
-const hole = "🕳";
+const hole = "👻";
 const fieldCharacter = "🌱";
 const playerCharacter = "🤓";
 
@@ -28,7 +28,7 @@ class Field {
     let hatCol = Math.floor(Math.random() * cols);
     field[hatRow][hatCol] = hat;
 
-    //บังคับให้จุด 0,0 ไม่เป็นหลุม
+    //ป้องกันจุดเริ่มต้นเป็นหลุม
     field[0][0] = fieldCharacter;
 
     return field;
@@ -64,58 +64,87 @@ class Field {
   }
 
   runGame() {
-    console.log("Controls:");
-    console.log("I = Up, K = Down, J = Left, L = Right");
-    console.log("----------------------");
+    let message = ""; //เก็บข้อความ error
 
     while (true) {
+      console.clear();
+
+      //ข้อความด้านบนเกม
+      console.log("👻 ====== GHOST ADVENTURE ====== 👻");
+      console.log("Find the magic hat before you disappear...\n");
+
+      console.log("🎮 Controls:");
+      console.log("I = Up | K = Down | J = Left | L = Right | Q = Quit");
+      console.log("\n===================================");
+
+      //ข้อความ
+      if (message) {
+        console.log(message);
+        console.log("");
+      }
+
+      //แผนที่
       this.addPlayer();
       this.print();
-      console.log("----------------------");
 
-      let move = prompt("Move (I/J/K/L): ");
+      console.log("===================================\n");
+
+      let move = prompt("Move (I / J / K / L or Q): ");
 
       if (!move) continue;
 
       move = move.toUpperCase();
 
-      // ลบตำแหน่งเดิม
-      this.field[this.playerRow][this.playerCol] = fieldCharacter;
+      const validMoves = ["I", "J", "K", "L", "Q"];
 
-      if (move === "I") {
-        this.moveUp();
-      } else if (move === "K") {
-        this.moveDown();
-      } else if (move === "J") {
-        this.moveLeft();
-      } else if (move === "L") {
-        this.moveRight();
+      if (!validMoves.includes(move)) {
+        message = "⚠️ Invalid input! Use I / J / K / L or Q only.";
+        continue;
       }
 
+      //reset message ถ้าถูกต้อง
+      message = "";
+
+      //ลบตำแหน่งเดิม
+      this.field[this.playerRow][this.playerCol] = fieldCharacter;
+
+      //quit
+      if (move === "Q") {
+        console.log("You left the haunted world... Bye! 👋");
+        break;
+      }
+
+      //ขยับ
+      if (move === "I") this.moveUp();
+      else if (move === "K") this.moveDown();
+      else if (move === "J") this.moveLeft();
+      else if (move === "L") this.moveRight();
+
+      //ออกนอกแผนที่
       if (
         this.playerRow < 0 ||
         this.playerRow >= this.field.length ||
         this.playerCol < 0 ||
         this.playerCol >= this.field[0].length
       ) {
-        console.log("Game Over! You went out of map 💥");
+        console.log("You drifted out of the spirit world... Game over! 💥");
         break;
       }
 
       let currentPosition = this.field[this.playerRow][this.playerCol];
 
       if (currentPosition === hole) {
-        console.log("You fell into a hole! Game over! 💀");
+        console.log("Oh no! A ghost caught you... Game over! 💀");
         break;
       }
 
       if (currentPosition === hat) {
-        console.log("You found the hat! You win! 🎉");
+        console.log("Boo! You found the magic hat! You win! 🎉");
         break;
       }
     }
   }
 }
 
-const myField = new Field(Field.generateField(10, 10, 0.1));
+const myField = new Field(Field.generateField(10, 12, 0.15));
 myField.runGame();
