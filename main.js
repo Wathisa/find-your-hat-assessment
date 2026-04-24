@@ -12,6 +12,10 @@ class Field {
       console.log(this.field[i].join(" "));
     }
   }
+
+  addPlayer() {
+    this.field[this.playerRow][this.playerCol] = "🤓";
+  }
 }
 
 const myField = new Field([
@@ -20,6 +24,7 @@ const myField = new Field([
   ["🌱", "🎩", "🌱"],
 ]);
 
+myField.addPlayer();
 myField.print();
 
 /////////////////////////////////////////////////
