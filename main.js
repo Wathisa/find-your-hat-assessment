@@ -35,4 +35,14 @@ while (true) {
   } else if (move === "L") {
     playerCol++;
   }
+
+  if (
+    playerRow < 0 ||
+    playerRow >= field.length ||
+    playerCol < 0 ||
+    playerCol >= field[0].length
+  ) {
+    console.log("Game Over! You went out of map 💥");
+    break;
+  }
 }
