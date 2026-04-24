@@ -1,4 +1,7 @@
-const prompt = require("prompt-sync")();
+const field = [
+  ["░", "░", "░"],
+  ["░", "░", "░"],
+  ["░", "░", "░"],
+];
 
-const name = prompt("What is your name? ");
-console.log("Hello " + name);
+console.log(field);
