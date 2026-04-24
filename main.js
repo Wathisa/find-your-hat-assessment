@@ -16,6 +16,19 @@ class Field {
   addPlayer() {
     this.field[this.playerRow][this.playerCol] = "🤓";
   }
+
+  moveUp() {
+    this.playerRow--;
+  }
+  moveDown() {
+    this.playerRow++;
+  }
+  moveLeft() {
+    this.playerCol--;
+  }
+  moveRight() {
+    this.playerCol++;
+  }
 }
 
 const myField = new Field([
@@ -24,6 +37,7 @@ const myField = new Field([
   ["🌱", "🎩", "🌱"],
 ]);
 
+myField.moveRight();
 myField.addPlayer();
 myField.print();
 
