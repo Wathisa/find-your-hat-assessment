@@ -3,8 +3,8 @@ const prompt = require("prompt-sync")();
 //สร้างแผนที่ของเกม
 const field = [
   ["🌱", "🌱", "🌱"],
-  ["🌱", "🌱", "🌱"],
-  ["🌱", "🌱", "🌱"],
+  ["🌱", "🕳", "🌱"],
+  ["🌱", "🌱", "🎩"],
 ];
 
 //สร้างตัวผู้เล่น
@@ -43,6 +43,18 @@ while (true) {
     playerCol >= field[0].length
   ) {
     console.log("Game Over! You went out of map 💥");
+    break;
+  }
+
+  let currentPosition = field[playerRow][playerCol];
+
+  if (currentPosition === "🕳") {
+    console.log("You fell into a hole! Game over! 💀");
+    break;
+  }
+
+  if (currentPosition === "🎩") {
+    console.log("You found the hat! You win! 🎉");
     break;
   }
 }
